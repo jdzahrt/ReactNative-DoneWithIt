@@ -1,18 +1,23 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View, Image, Text} from "react-native";
+import {ImageBackground, StyleSheet, View, Image, Text, Button} from "react-native";
 import colors from "../config/colors";
+import AppButton from "../components/AppButton";
 
 function WelcomeScreen(props) {
     return (
         <ImageBackground
             source={require('../assets/background.jpg')}
-            style={styles.background}>
+            style={styles.background}
+            blurRadius='5'
+        >
             <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../assets/logo-red.png')} />
-                <Text>Sell What You Don't Need</Text>
+                <Image style={styles.logo} source={require('../assets/logo-red.png')}/>
+                <Text style={styles.text}>Sell What You Don't Need</Text>
             </View>
-            <View style={styles.loginButton}></View>
-            <View style={styles.registerButton}></View>
+            <View style={styles.buttonsContainer}>
+                <AppButton title='login' color='primary' onPress={() => console.log('Login tapped')}>login</AppButton>
+                <AppButton title='register' color='secondary'>register</AppButton>
+            </View>
         </ImageBackground>
     );
 }
@@ -21,12 +26,12 @@ const styles = StyleSheet.create({
     background: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
     },
-    loginButton: {
-        width: '100%',
-        height: 70,
-        backgroundColor: colors.primary,
+    buttonsContainer: {
+        position: 'absolute',
+        bottom: 70,
+        alignItems: 'center'
     },
     logo: {
         width: 100,
@@ -37,10 +42,11 @@ const styles = StyleSheet.create({
         top: 70,
         alignItems: 'center'
     },
-    registerButton: {
-        width: '100%',
-        height: 70,
-        backgroundColor: colors.secondary,
+    text: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        color: colors.black,
+        paddingVertical: 20
     }
 });
 
