@@ -5,6 +5,9 @@ import {TextInput, Text, Switch} from "react-native";
 import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import AppFormPicker from "./app/components/forms/AppFormPicker";
+import ListEditScreen from "./app/screens/ListEditScreen";
 
 const categories = [
     {label: 'Furniture', value: 1},
@@ -17,7 +20,8 @@ export default function App() {
 
     return (
         <GestureHandlerRootView>
-            <LoginScreen />
+            {/*<LoginScreen />*/}
+            <ListEditScreen items={categories} />
         </GestureHandlerRootView>
     );
 }
