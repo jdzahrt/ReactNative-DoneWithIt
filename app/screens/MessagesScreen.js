@@ -10,7 +10,11 @@ const initialMessages = [
     {
         id: 1,
         title: 'T1',
-        description: 'D1',
+        description: 'This is a test where I am trying' +
+            'to make this a long message' +
+            'where it goes more than 3 sentences' +
+            'so we will see how that goesr who knows' +
+            'we are still herer',
         image: require('../assets/mosh.jpg')
     },
     {
@@ -48,24 +52,11 @@ function MessagesScreen() {
                       ItemSeparatorComponent={ListItemSeparator}
                       refreshing={refreshing}
                       onRefresh={() => {
-                          setMessages([
-                              {
-                                  id: 2,
-                                  title: 'T2',
-                                  description: 'D2',
-                                  image: require('../assets/mosh.jpg')
-                              }
-                          ])
+                          setMessages(initialMessages)
                       }}
             />
         </Screen>
     );
 }
-
-// const styles = StyleSheet.create({
-//     screen: {
-//         paddingTop: Constants.statusBarHeight
-//     }
-// })
 
 export default MessagesScreen;

@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label('Title'),
     price: Yup.number().required().min(1).max(10000).label('Price'),
     category: Yup.object().required().label('Category'),
-    description: Yup.string().optional().label('Description')
+    description: Yup.string().optional().nullable().label('Description')
 })
 
 function ListEditScreen(props) {
@@ -22,35 +22,46 @@ function ListEditScreen(props) {
                 source={require('../assets/logo-red.png')}
             />
             <AppForm
-                initialValues={{title: '', price: ''}}
+                initialValues={{
+                    title: '',
+                    price: '',
+                    description: '',
+                    category: null
+                }}
                 onSubmit={values => console.log(values)}
                 validationSchema={validationSchema}
             >
                 <AppFormField
                     autoCapitalize={'none'}
                     autoCorrect={false}
-                    name={'title'}
                     keyboardTypef={'title'}
+                    maxLength={255}
+                    name={'title'}
                     placeholder={'Title'}
                     textContentType={'title'}
+                    width={200}
                 />
                 <AppFormField
                     autoCapitalize={'none'}
                     autoCorrect={false}
+                    maxLength={8}
                     name={'price'}
                     keyboardTypef={'price'}
                     placeholder={'Price'}
                     textContentType={'price'}
+                    width={150}
                 />
                 <AppFormPicker
                     items={props.items}
                     name={'category'}
                     placeholder={'Category'}
+                    width={150}
                 />
                 <AppFormField
-                    autoCapitalize={'none'}
-                    autoCorrect={false}
+                    maxLength={255}
+                    multiline
                     name={'description'}
+                    numberOfLines={3}
                     placeholder={'Description'}
                     textContentType={'description'}
                 />
