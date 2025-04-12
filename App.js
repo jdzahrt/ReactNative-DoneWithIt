@@ -1,16 +1,9 @@
-import {useState} from "react";
-import {GestureHandlerRootView} from "react-native-gesture-handler";
+import {useEffect, useState} from "react";
 import Screen from "./app/components/Screen";
-import {TextInput, Text, Switch} from "react-native";
-import AppTextInput from "./app/components/AppTextInput";
-import AppPicker from "./app/components/AppPicker";
-import LoginScreen from "./app/screens/LoginScreen";
-import RegisterScreen from "./app/screens/RegisterScreen";
-import AppFormPicker from "./app/components/forms/AppFormPicker";
-import ListEditScreen from "./app/screens/ListEditScreen";
-import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
-import MyAccountScreen from "./app/screens/MyAccountScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
+import * as ImagePicker from 'expo-image-picker';
+import {Button, Image} from "react-native";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 const categories = [
     {label: 'Furniture', value: 1, iconName: 'floor-lamp', backgroundColor: '#fc5c65'},
@@ -25,16 +18,24 @@ const categories = [
 ]
 
 export default function App() {
-    const [category, setCategory] = useState(categories[0]);
+    const [imageUris, setImageUris] = useState([])
+
+    const handleAdd = (uri) => {
+        setImageUris([...imageUris, uri])
+    }
+
+    const handleRemove = (uri) => {
+        setImageUris(imageUris.filter(imageUri => imageUri !== uri))
+    }
 
     return (
-        <GestureHandlerRootView>
-            {/*<LoginScreen />*/}
-            <ListEditScreen items={categories}/>
-            {/*<ListingDetailsScreen />*/}
-            {/*<MessagesScreen />*/}
-            {/*<MyAccountScreen />*/}
-        </GestureHandlerRootView>
-    );
+        <Screen>
+            <ImageInputList
+                imageUris={imageUris}
+                onAddImage={handleAdd}
+                onRemoveImage={handleRemove}
+            />
+        </Screen>
+    )
 }
 
