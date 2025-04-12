@@ -18,6 +18,7 @@ function AppPicker({
                        width = '100%'
                    }) {
     const [modalVisible, setModalVisible] = useState(false)
+    // console.log('izzy', items)
 
     return (<>
         <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -40,13 +41,13 @@ function AppPicker({
                           numColumns={numberOfColumns}
                           keyExtractor={(item) => item.value.toString()}
                           renderItem={({item}) => (
-                              <PickerItemComponent
-                                  item={item}
-                                  onPress={() => {
-                                      setModalVisible(false)
-                                      onSelectItem(item)
-                                  }}
-                              />)}
+                              <PickerItemComponent item={item}
+                                                   label={item.label}
+                                                   onPress={() => {
+                                                       setModalVisible(false)
+                                                       onSelectItem(item)
+                                                   }}/>
+                          )}
                 />
             </Screen>
         </Modal>

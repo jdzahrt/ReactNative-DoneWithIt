@@ -5,8 +5,6 @@ import colors from "../config/colors";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 function ImageInput({imageUri, onChangeImage}) {
-    console.log('Image URI: ', imageUri)
-    console.log('f', onChangeImage)
     useEffect(() => {
         requestPermission()
     }, []);
