@@ -1,9 +1,10 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View, Image, Text, Button} from "react-native";
+import {ImageBackground, StyleSheet, View, Image, Text} from "react-native";
 import colors from "../config/colors";
 import AppButton from "../components/AppButton";
+import routes from "../navigation/routes";
 
-function WelcomeScreen(props) {
+function WelcomeScreen({navigation}) {
     return (
         <ImageBackground
             source={require('../assets/background.jpg')}
@@ -15,8 +16,8 @@ function WelcomeScreen(props) {
                 <Text style={styles.text}>Sell What You Don't Need</Text>
             </View>
             <View style={styles.buttonsContainer}>
-                <AppButton title='login' color='primary' onPress={() => console.log('Login tapped')}>login</AppButton>
-                <AppButton title='register' color='secondary'>register</AppButton>
+                <AppButton title='login' color='primary' onPress={() => navigation.navigate(routes.LOGIN)}>login</AppButton>
+                <AppButton title='register' color='secondary' onPress={()=> navigation.navigate(routes.REGISTER)}>register</AppButton>
             </View>
         </ImageBackground>
     );

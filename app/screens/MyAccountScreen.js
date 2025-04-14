@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, FlatList} from "react-native";
+import {View, StyleSheet, FlatList} from "react-native";
 
 import Screen from "../components/Screen";
 import ListItem from "../components/lists/ListItem";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
+import routes from "../navigation/routes";
 
 const menuItems = [
     {
@@ -20,11 +21,12 @@ const menuItems = [
         icon: {
             name: 'email',
             backgroundColor: colors.secondary
-        }
-    }
+        },
+        targetScreen: routes.MESSAGES
+    },
 ]
 
-function MyAccountScreen(props) {
+function MyAccountScreen({navigation}) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
@@ -48,6 +50,7 @@ function MyAccountScreen(props) {
                                     backgroundColor={item.icon.backgroundColor}
                                 />
                             }
+                            onPress={() => navigation.navigate(item.targetScreen)}
                         />
                     }
                 />
@@ -62,25 +65,6 @@ function MyAccountScreen(props) {
                 }
             />
         </Screen>
-        // <View style={{backgroundColor: '#f2f2f2', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        //     <View style={styles.listingsContainer}>
-        //         <TouchableOpacity>
-        //             <View style={styles.listings}>
-        //                 <MaterialCommunityIcons name="format-list-bulleted" color={'white'} size={30}/>
-        //             </View>
-        //         </TouchableOpacity>
-        //         <TouchableOpacity>
-        //             <View style={styles.messages}>
-        //                 <MaterialCommunityIcons name="email" color={'white'} size={30}/>
-        //             </View>
-        //         </TouchableOpacity>
-        //     </View>
-        //     <TouchableOpacity>
-        //         <View style={styles.logout}>
-        //             <MaterialCommunityIcons name="logout" color={'white'} size={30}/>
-        //         </View>
-        //     </TouchableOpacity>
-        // </View>
     );
 }
 
