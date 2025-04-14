@@ -1,4 +1,6 @@
-import ListEditScreen from "./app/screens/ListEditScreen";
+import {NavigationContainer} from "@react-navigation/native";
+import AppNavigator from "./app/navigation/AppNavigator";
+import navigationTheme from "./app/navigation/NavigationTheme";
 
 const categories = [
     {label: 'Furniture', value: 1, iconName: 'floor-lamp', backgroundColor: '#fc5c65'},
@@ -14,7 +16,9 @@ const categories = [
 
 export default function App() {
     return (
-        <ListEditScreen items={categories}/>
+        <NavigationContainer theme={navigationTheme}>
+            <AppNavigator />
+        </NavigationContainer>
     )
 }
 
