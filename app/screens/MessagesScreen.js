@@ -15,13 +15,13 @@ const initialMessages = [
             'where it goes more than 3 sentences' +
             'so we will see how that goesr who knows' +
             'we are still herer',
-        image: require('../assets/mosh.jpg')
+        image: require('../assets/jzpic.jpeg')
     },
     {
         id: 2,
         title: 'T2',
         description: 'D2',
-        image: require('../assets/mosh.jpg')
+        image: require('../assets/jzpic.jpeg')
     }
 ]
 

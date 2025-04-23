@@ -4,10 +4,10 @@ import {FlatList, StyleSheet, Text} from "react-native";
 import Card from "../components/Card";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
-import {getListings} from "../api/listings";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
+import {getListings} from "../api/listings";
 
 
 function ListingsScreen({navigation}) {
@@ -15,7 +15,7 @@ function ListingsScreen({navigation}) {
 
 
     useEffect(() => {
-        getListingsApi.request(1,2,3);
+        getListingsApi.request();
     }, []);
 
     return (
