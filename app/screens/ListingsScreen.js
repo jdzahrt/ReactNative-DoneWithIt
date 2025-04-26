@@ -7,11 +7,11 @@ import routes from "../navigation/routes";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
-import {getListings} from "../api/listings";
+import listingsAPI from "../api/listings";
 
 
 function ListingsScreen({navigation}) {
-    const getListingsApi = useApi(getListings)
+    const getListingsApi = useApi(listingsAPI.getListings)
 
 
     useEffect(() => {
