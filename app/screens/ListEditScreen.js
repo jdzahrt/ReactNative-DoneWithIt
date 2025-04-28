@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Screen from '../components/Screen'
 
 import {StyleSheet, Image} from 'react-native';
@@ -10,6 +10,7 @@ import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
 import useLocation from "../hooks/useLocation";
 import listingsApi from "../api/listings";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label('Title'),
@@ -34,18 +35,23 @@ const categories = [
 function ListEditScreen(props) {
     const location = useLocation();
 
-    const handleListing = async (listing) =>  {
-        const result = await listingsApi.postListing({...listing, location})
+    const handleSubmit = async (listing, { resetForm }) => {
+        const result = await listingsApi.postListing(
+            {...listing, location})
 
         if (!result.ok) {
             console.log('Error posting listing', result)
             return alert('Could not post listing')
         }
-        return alert('Listing posted successfully')
+
+        resetForm();
+        props.navigation.navigate('Listings')
+
     }
 
     return (
         <Screen style={styles.container}>
+            <UploadScreen />
             <Image
                 style={styles.logo}
                 source={require('../assets/logo-red.png')}
@@ -58,7 +64,7 @@ function ListEditScreen(props) {
                     category: null,
                     images: []
                 }}
-                onSubmit={handleListing}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 <FormImagePicker name={'images'}/>
