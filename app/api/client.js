@@ -2,7 +2,7 @@ import {create} from 'apisauce';
 import cache from "../utility/cache";
 
 const apiClient = create({
-    baseURL: 'http://127.0.0.1:9000/api',
+    baseURL: 'http://192.168.86.24:9000/api',
     headers: {
         Accept: 'application/json',
     },
