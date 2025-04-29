@@ -18,7 +18,6 @@ function AppPicker({
                        width = '100%'
                    }) {
     const [modalVisible, setModalVisible] = useState(false)
-    // console.log('izzy', items)
 
     return (<>
         <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>

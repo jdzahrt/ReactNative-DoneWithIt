@@ -8,6 +8,7 @@ import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import routes from "../navigation/routes";
 import AuthContext from "../auth/context";
+import authStorage from "../auth/storage";
 
 const menuItems = [
     {
@@ -29,14 +30,19 @@ const menuItems = [
 ]
 
 function MyAccountScreen({navigation}) {
-    const authContext = useContext(AuthContext)
+    const {user, setUser} = useContext(AuthContext)
+
+    const handleLogout = () => {
+        setUser(null)
+        authStorage.removeToken();
+    }
 
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <ListItem
-                    title={authContext.user.name}
-                    subTitle={authContext.user.email}
+                    title={user.name}
+                    subTitle={user.email}
                     image={require('../assets/jzpic.jpeg')}
                 />
             </View>
@@ -67,8 +73,7 @@ function MyAccountScreen({navigation}) {
                         backgroundColor='#ffe66d'
                     />
                 }
-                // onPress={() => setUser(null)}
-                onPress={() => authContext.setUser(null)}
+                onPress={handleLogout}
             />
         </Screen>
     );
