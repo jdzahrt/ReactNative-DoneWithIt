@@ -45,7 +45,8 @@
     "react-native-web": "~0.19.13",
     "uuid": "^11.1.0",
     "yup": "^1.6.1",
-    "expo-secure-store": "~14.0.1"
+    "expo-secure-store": "~14.0.1",
+    "expo-splash-screen": "~0.29.24"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

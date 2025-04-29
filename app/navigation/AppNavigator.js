@@ -15,8 +15,9 @@ function AppNavigator(props) {
         <GestureHandlerRootView>
             <Tab.Navigator
                 screenOptions={{
+                    headerShown: false,
                     headerStyle: {backgroundColor: 'tomato'},
-                    headerTintColor: 'white'
+                    headerTintColor: 'white',
                 }}
             >
                 <Tab.Screen
