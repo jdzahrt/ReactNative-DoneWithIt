@@ -1,19 +1,20 @@
 import {NavigationContainer} from "@react-navigation/native";
-import AppNavigator from "./app/navigation/AppNavigator";
 import navigationTheme from "./app/navigation/NavigationTheme";
-import NetInfo from '@react-native-community/netinfo'
 import OfflineNotice from "./app/components/OfflineNotice";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import AuthContext from "./app/auth/context";
+import {useState} from "react";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 export default function App() {
-    // NetInfo.addEventListener(netInfo => console.log(netInfo))
-
+    const [user, setUser] = useState(null);
     return (
-        <>
+        <AuthContext.Provider value={{user, setUser}}>
             <OfflineNotice/>
             <NavigationContainer theme={navigationTheme}>
-                <AppNavigator/>
+                {user ? <AppNavigator /> : <AuthNavigator />}
             </NavigationContainer>
-        </>
+        </AuthContext.Provider>
     )
 }
 
