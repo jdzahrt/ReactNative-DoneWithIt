@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, FlatList} from "react-native";
 
 import Screen from "../components/Screen";
@@ -7,6 +7,7 @@ import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import routes from "../navigation/routes";
+import AuthContext from "../auth/context";
 
 const menuItems = [
     {
@@ -14,7 +15,8 @@ const menuItems = [
         icon: {
             name: 'format-list-bulleted',
             backgroundColor: colors.primary
-        }
+        },
+        targetScreen: routes.LISTINGS
     },
     {
         title: 'My Messages',
@@ -27,12 +29,14 @@ const menuItems = [
 ]
 
 function MyAccountScreen({navigation}) {
+    const authContext = useContext(AuthContext)
+
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <ListItem
-                    title="Jesse"
-                    subTitle="email"
+                    title={authContext.user.name}
+                    subTitle={authContext.user.email}
                     image={require('../assets/jzpic.jpeg')}
                 />
             </View>
@@ -63,6 +67,8 @@ function MyAccountScreen({navigation}) {
                         backgroundColor='#ffe66d'
                     />
                 }
+                // onPress={() => setUser(null)}
+                onPress={() => authContext.setUser(null)}
             />
         </Screen>
     );
