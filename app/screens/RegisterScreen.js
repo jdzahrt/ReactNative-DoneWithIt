@@ -5,14 +5,38 @@ import {StyleSheet, Image} from 'react-native';
 
 import * as Yup from "yup";
 import {AppForm, AppFormField, SubmitButton} from '../components/forms'
+import usersApi from "../api/users";
+import authAPI from "../api/auth";
+import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required().label('Name'),
+    user: Yup.string().required().label('Name'),
     email: Yup.string().required().email().label('Email'),
     password: Yup.string().required().min(4).label('Password')
 })
 
 function RegisterScreen(props) {
+    const {logIn} = useAuth()
+    const [error, setError] = React.useState(null)
+
+    const handleSubmit = async (user) => {
+        const result = await usersApi.addUser({...user})
+
+        if (!result.ok) {
+            if (result.data) setError(result.data.error);
+            else {
+                setError('An unexpected error occurred.')
+                console.log(result)
+            }
+            return
+        }
+
+        const {data: authToken} = await authAPI.login(
+            user.email, user.password
+        )
+        logIn(authToken)
+    }
+
     return (
         <Screen style={styles.container}>
             <Image
@@ -20,15 +44,15 @@ function RegisterScreen(props) {
                 source={require('../assets/logo-red.png')}
             />
             <AppForm
-                initialValues={{email: '', password: ''}}
-                onSubmit={values => console.log(values)}
+                initialValues={{email: '', password: '', user: ''}}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 <AppFormField
                     autoCapitalize={'none'}
                     autoCorrect={false}
                     icon={'human-male'}
-                    name={'user-name'}
+                    name={'user'}
                     keyboardTypef={'user-name'}
                     placeholder={'Name'}
                     textContentType={'userName'}
