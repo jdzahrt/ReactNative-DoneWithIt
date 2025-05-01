@@ -26,7 +26,11 @@
     "expo-dev-client": "~5.0.20",
     "expo-image-picker": "~16.0.6",
     "expo-location": "~18.0.10",
+    "expo-notifications": "~0.29.14",
     "expo-permissions": "^14.4.0",
+    "expo-secure-store": "~14.0.1",
+    "expo-server-sdk": "^3.15.0",
+    "expo-splash-screen": "~0.29.24",
     "expo-status-bar": "~2.0.1",
     "expo-updates": "0.26.19",
     "formik": "^2.4.6",
@@ -44,9 +48,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "uuid": "^11.1.0",
-    "yup": "^1.6.1",
-    "expo-secure-store": "~14.0.1",
-    "expo-splash-screen": "~0.29.24"
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

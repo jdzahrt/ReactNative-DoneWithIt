@@ -15,7 +15,11 @@
     },
     "ios": {
       "jsEngine": "hermes",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jesse.zahrt.DoneWithIt",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "jsEngine": "hermes",
@@ -40,6 +44,7 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "owner": "jesse.zahrt"
   }
 }

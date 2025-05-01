@@ -10,6 +10,7 @@ import authAPI from "../api/auth";
 import useAuth from "../auth/useAuth";
 import useApi from "../hooks/useApi";
 import ActivityIndicator from "../components/ActivityIndicator";
+import ErrorMessage from "../components/forms/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
     user: Yup.string().required().label('Name'),
@@ -24,14 +25,12 @@ function RegisterScreen(props) {
     const [error, setError] = React.useState(null)
 
     const handleSubmit = async (user) => {
+        console.log('hitting submit')
         const result = await registerApi.request(user)
-
+        console.log(result.data)
         if (!result.ok) {
-            if (result.data) setError(result.data.error);
-            else {
-                setError('An unexpected error occurred.')
-                console.log(result)
-            }
+            setError(result.data.error)
+            console.log(result)
             return
         }
 
@@ -39,11 +38,14 @@ function RegisterScreen(props) {
             user.email,
             user.password
         )
+        console.log('auttoken', authToken)
         logIn(authToken)
+
     }
 
     return (
         <>
+            <ErrorMessage error={error}/>
             <ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
             <Screen style={styles.container}>
 
@@ -78,6 +80,7 @@ function RegisterScreen(props) {
                         autoCapitalize={'none'}
                         autoCorrect={false}
                         icon={'lock'}
+                        minLength={5}
                         name={'password'}
                         placeholder={'Password'}
                         secureTextEntry
