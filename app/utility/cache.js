@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import logger from "./logger";
 
 const store = async (key, value) => {
     try {
@@ -10,7 +11,7 @@ const store = async (key, value) => {
         await AsyncStorage.setItem(key, JSON.stringify(item))
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
     }
 }
 
@@ -37,7 +38,7 @@ const get = async (key) => {
         return item.value
     }
     catch (e) {
-        console.log(e)
+        logger.error(e)
     }
 }
 

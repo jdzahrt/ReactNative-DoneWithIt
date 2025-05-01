@@ -5,7 +5,12 @@
     "slug": "DoneWithIt",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/splash.png",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "icon": "./app/assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -34,6 +39,9 @@
     "extra": {
       "eas": {
         "projectId": "e8a0eca6-0633-422f-9513-7e41947453ac"
+      },
+      "bugsnag": {
+        "apiKey": "2eaf15b7b5ee453dd58df93f4c63bc78"
       }
     },
     "runtimeVersion": {
@@ -43,7 +51,8 @@
       "url": "https://u.expo.dev/e8a0eca6-0633-422f-9513-7e41947453ac"
     },
     "plugins": [
-      "expo-secure-store"
+      "expo-secure-store",
+      "@bugsnag/plugin-expo-eas-sourcemaps"
     ],
     "owner": "jesse.zahrt"
   }

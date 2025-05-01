@@ -1,3 +1,7 @@
+import logger from "./app/utility/logger";
+
+logger.start()
+
 import {NavigationContainer} from "@react-navigation/native";
 import navigationTheme from "./app/navigation/NavigationTheme";
 import OfflineNotice from "./app/components/OfflineNotice";

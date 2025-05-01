@@ -2,7 +2,11 @@ import apiClient from "./client";
 
 const endpoint = "/listings";
 
-const getListings = () => apiClient.get(endpoint);
+const getListings = async () => {
+    const listings = await apiClient.get(endpoint);
+
+    return listings
+}
 
 const postListing = (listingData) => {
     const data = new FormData()
@@ -13,8 +17,8 @@ const postListing = (listingData) => {
 
     listingData.images.forEach((image, index) =>
         data.append('images', {
-        name: 'image' + index, type: 'image/jpeg', uri: image
-    }))
+            name: 'image' + index, type: 'image/jpeg', uri: image
+        }))
 
     if (listingData.location) data.append('location', JSON.stringify(listingData.location))
 
