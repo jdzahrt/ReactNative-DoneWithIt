@@ -8,6 +8,8 @@ import {AppForm, AppFormField, SubmitButton} from '../components/forms'
 import usersApi from "../api/users";
 import authAPI from "../api/auth";
 import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 const validationSchema = Yup.object().shape({
     user: Yup.string().required().label('Name'),
@@ -16,11 +18,13 @@ const validationSchema = Yup.object().shape({
 })
 
 function RegisterScreen(props) {
+    const registerApi = useApi(usersApi.addUser)
+    const loginApi = useApi(authAPI.login)
     const {logIn} = useAuth()
     const [error, setError] = React.useState(null)
 
     const handleSubmit = async (user) => {
-        const result = await usersApi.addUser({...user})
+        const result = await registerApi.request(user)
 
         if (!result.ok) {
             if (result.data) setError(result.data.error);
@@ -31,53 +35,58 @@ function RegisterScreen(props) {
             return
         }
 
-        const {data: authToken} = await authAPI.login(
-            user.email, user.password
+        const {data: authToken} = await loginApi.request(
+            user.email,
+            user.password
         )
         logIn(authToken)
     }
 
     return (
-        <Screen style={styles.container}>
-            <Image
-                style={styles.logo}
-                source={require('../assets/logo-red.png')}
-            />
-            <AppForm
-                initialValues={{email: '', password: '', user: ''}}
-                onSubmit={handleSubmit}
-                validationSchema={validationSchema}
-            >
-                <AppFormField
-                    autoCapitalize={'none'}
-                    autoCorrect={false}
-                    icon={'human-male'}
-                    name={'user'}
-                    keyboardTypef={'user-name'}
-                    placeholder={'Name'}
-                    textContentType={'userName'}
+        <>
+            <ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
+            <Screen style={styles.container}>
+
+                <Image
+                    style={styles.logo}
+                    source={require('../assets/logo-red.png')}
                 />
-                <AppFormField
-                    autoCapitalize={'none'}
-                    autoCorrect={false}
-                    icon={'email'}
-                    name={'email'}
-                    keyboardTypef={'email-address'}
-                    placeholder={'Email'}
-                    textContentType={'emailAddress'}
-                />
-                <AppFormField
-                    autoCapitalize={'none'}
-                    autoCorrect={false}
-                    icon={'lock'}
-                    name={'password'}
-                    placeholder={'Password'}
-                    secureTextEntry
-                    textContentType={'password'}
-                />
-                <SubmitButton title='Register'/>
-            </AppForm>
-        </Screen>
+                <AppForm
+                    initialValues={{email: '', password: '', user: ''}}
+                    onSubmit={handleSubmit}
+                    validationSchema={validationSchema}
+                >
+                    <AppFormField
+                        autoCapitalize={'none'}
+                        autoCorrect={false}
+                        icon={'human-male'}
+                        name={'user'}
+                        keyboardTypef={'user-name'}
+                        placeholder={'Name'}
+                        textContentType={'userName'}
+                    />
+                    <AppFormField
+                        autoCapitalize={'none'}
+                        autoCorrect={false}
+                        icon={'email'}
+                        name={'email'}
+                        keyboardTypef={'email-address'}
+                        placeholder={'Email'}
+                        textContentType={'emailAddress'}
+                    />
+                    <AppFormField
+                        autoCapitalize={'none'}
+                        autoCorrect={false}
+                        icon={'lock'}
+                        name={'password'}
+                        placeholder={'Password'}
+                        secureTextEntry
+                        textContentType={'password'}
+                    />
+                    <SubmitButton title='Register'/>
+                </AppForm>
+            </Screen>
+        </>
     );
 }
 
