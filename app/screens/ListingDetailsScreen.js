@@ -3,6 +3,7 @@ import {View, StyleSheet} from "react-native";
 import AppText from "../components/AppText";
 import ListItem from "../components/lists/ListItem";
 import {Image} from 'react-native-expo-image-cache';
+import ContactSellerForm from "../components/ContactSellerForm";
 
 function ListingDetailsScreen({route}) {
     const listing = route.params;
@@ -24,6 +25,7 @@ function ListingDetailsScreen({route}) {
                     />
                 </View>
             </View>
+            <ContactSellerForm listing={listing}/>
         </View>
     );
 }
