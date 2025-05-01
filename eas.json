@@ -8,6 +8,15 @@
       "developmentClient": true,
       "distribution": "internal",
       "channel": "development",
+      "android": {
+        "gradleCommand": ":app:assembleDebug",
+        "env": {
+          "KOTLIN_VERSION": "1.8.0",
+          "JAVA_HOME": "/usr/lib/jvm/java-11-openjdk",
+          "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx4096m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError"
+
+        }
+      },
       "ios": {
         "simulator": true
       }
