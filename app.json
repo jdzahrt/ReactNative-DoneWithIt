@@ -36,9 +36,6 @@
     "extra": {
       "eas": {
         "projectId": "e8a0eca6-0633-422f-9513-7e41947453ac"
-      },
-      "bugsnag": {
-        "apiKey": "2eaf15b7b5ee453dd58df93f4c63bc78"
       }
     },
     "runtimeVersion": {
@@ -48,8 +45,7 @@
       "url": "https://u.expo.dev/e8a0eca6-0633-422f-9513-7e41947453ac"
     },
     "plugins": [
-      "expo-secure-store",
-      "@bugsnag/plugin-expo-eas-sourcemaps"
+      "expo-secure-store"
     ],
     "owner": "jesse.zahrt"
   }
