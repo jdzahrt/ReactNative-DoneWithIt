@@ -8,8 +8,21 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import authStorage from "./app/auth/storage";
 import * as SplashScreen from "expo-splash-screen";
 import {View} from "react-native";
+import * as Sentry from '@sentry/react-native';
 
-export default function App() {
+Sentry.init({
+  dsn: 'https://9ce9fc4d7a65bac758bcabb77138dd4f@o4509271345987584.ingest.us.sentry.io/4509271358504960',
+
+  // Configure Session Replay
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1,
+  integrations: [Sentry.mobileReplayIntegration()],
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+});
+
+export default Sentry.wrap(function App() {
     const [user, setUser] = useState(null);
     const [isReady, setIsReady] = useState(false);
 
@@ -52,5 +65,4 @@ export default function App() {
             </AuthContext.Provider>
         </View>
     )
-}
-
+});

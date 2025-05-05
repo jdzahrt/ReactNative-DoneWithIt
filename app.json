@@ -45,7 +45,15 @@
       "url": "https://u.expo.dev/e8a0eca6-0633-422f-9513-7e41947453ac"
     },
     "plugins": [
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "done-with-it",
+          "organization": "jessezahrt"
+        }
+      ]
     ],
     "owner": "jesse.zahrt"
   }
