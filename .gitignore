@@ -6,8 +6,12 @@ node_modules/
 # Expo
 .expo/
 dist/
-web-build/
 expo-env.d.ts
+
+# Expo Build files
+ios/build/
+android/app/build/
+web-build/
 
 # Native
 *.orig.*
@@ -39,4 +43,8 @@ yarn-error.*
 .vscode
 .idea
 
+# EAS
 .env.local
+.env.development.local
+.env.test.local
+.env.production.local

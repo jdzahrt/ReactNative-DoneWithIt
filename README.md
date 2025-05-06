@@ -1,3 +1,7 @@
 ```shell
-npx expo start --port 19001
+npm start
+```
+
+```shell
+eas build:dev
 ```

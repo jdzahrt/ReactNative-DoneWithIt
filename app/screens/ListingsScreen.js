@@ -5,7 +5,6 @@ import Card from "../components/Card";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
 import AppButton from "../components/AppButton";
-import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
 import listingsAPI from "../api/listings";
 
@@ -20,7 +19,6 @@ function ListingsScreen({navigation}) {
 
     return (
         <>
-            <ActivityIndicator visible={getListingsApi.loading}></ActivityIndicator>
             <Screen style={styles.screen}>
                 {getListingsApi.error && (
                     <>

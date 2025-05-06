@@ -9,7 +9,6 @@ import usersApi from "../api/users";
 import authAPI from "../api/auth";
 import useAuth from "../auth/useAuth";
 import useApi from "../hooks/useApi";
-import ActivityIndicator from "../components/ActivityIndicator";
 import ErrorMessage from "../components/forms/ErrorMessage";
 
 const validationSchema = Yup.object().shape({
@@ -25,9 +24,7 @@ function RegisterScreen(props) {
     const [error, setError] = React.useState(null)
 
     const handleSubmit = async (user) => {
-        console.log('hitting submit')
         const result = await registerApi.request(user)
-        console.log(result.data)
         if (!result.ok) {
             setError(result.data.error)
             console.log(result)
@@ -38,15 +35,12 @@ function RegisterScreen(props) {
             user.email,
             user.password
         )
-        console.log('auttoken', authToken)
         logIn(authToken)
-
     }
 
     return (
         <>
             <ErrorMessage error={error}/>
-            <ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
             <Screen style={styles.container}>
 
                 <Image
